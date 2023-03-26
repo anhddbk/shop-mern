@@ -1,11 +1,4 @@
-import '../../styled/Auth/Register.styled.scss'
-import {
-  Button,
-  Checkbox,
-  Form,
-  Input,
-  Select,
-} from 'antd';
+import { Button, Checkbox, Form, Input, Select } from 'antd';
 
 const { Option } = Select;
 
@@ -33,7 +26,11 @@ const tailFormItemLayout = {
   },
 };
 
-const Register: React.FC = () => {
+type RegisterProps = {
+  closeRegister?: () => void;
+};
+
+const Register = (props: RegisterProps) => {
   const [form] = Form.useForm();
 
   const onFinish = (values: any) => {
@@ -43,20 +40,20 @@ const Register: React.FC = () => {
   const prefixSelector = (
     <Form.Item name="prefix" noStyle>
       <Select style={{ width: 70 }}>
+        <Option value="87">+84</Option>
         <Option value="86">+86</Option>
-        <Option value="87">+87</Option>
       </Select>
     </Form.Item>
   );
 
   return (
-    <div className="container">
+    <div className="register-container">
       <Form
         {...formItemLayout}
         form={form}
         name="register"
+        initialValues={{ prefix: '84' }}
         onFinish={onFinish}
-        initialValues={{ residence: ['zhejiang', 'hangzhou', 'xihu'], prefix: '86' }}
         style={{ maxWidth: 600 }}
         scrollToFirstError
       >
@@ -66,11 +63,11 @@ const Register: React.FC = () => {
           rules={[
             {
               type: 'email',
-              message: 'The input is not valid E-mail!',
+              message: 'Đây không phải E-mail!',
             },
             {
               required: true,
-              message: 'Please input your E-mail!',
+              message: 'Vui lòng nhập E-mail!',
             },
           ]}
         >
@@ -79,11 +76,11 @@ const Register: React.FC = () => {
 
         <Form.Item
           name="password"
-          label="Password"
+          label="Mật khẩu"
           rules={[
             {
               required: true,
-              message: 'Please input your password!',
+              message: 'Vui lòng nhập mật khẩu!',
             },
           ]}
           hasFeedback
@@ -93,13 +90,13 @@ const Register: React.FC = () => {
 
         <Form.Item
           name="confirm"
-          label="Confirm Password"
+          label="Nhập lại mật khẩu"
           dependencies={['password']}
           hasFeedback
           rules={[
             {
               required: true,
-              message: 'Please confirm your password!',
+              message: 'Vui lòng xác nhận mật khẩu!',
             },
             ({ getFieldValue }) => ({
               validator(_, value) {
@@ -118,29 +115,29 @@ const Register: React.FC = () => {
 
         <Form.Item
           name="nickname"
-          label="Nickname"
-          tooltip="What do you want others to call you?"
-          rules={[{ required: true, message: 'Please input your nickname!', whitespace: true }]}
+          label="Tên đăng nhập"
+          tooltip="Sử dụng để đăng nhập thay email và hiển thị"
+          rules={[{ required: true, message: 'Vui lòng nhập tên đăng nhập!', whitespace: true }]}
         >
           <Input />
         </Form.Item>
 
         <Form.Item
           name="phone"
-          label="Phone Number"
-          rules={[{ required: true, message: 'Please input your phone number!' }]}
+          label="Số điện thoại"
+          rules={[{ required: true, message: 'Vui lòng nhập số điện thoại!' }]}
         >
           <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
         </Form.Item>
 
-        <Form.Item label="Captcha" extra="We must make sure that your are a member.">
-              <Form.Item
-                name="captcha"
-                noStyle
-                rules={[{ required: true, message: 'Please input the captcha you got!' }]}
-              >
-                <Input />
-              </Form.Item>
+        <Form.Item label="Mã thành viên" extra="Vui lòng hỏi quản lý để lấy mã thành viên!">
+          <Form.Item
+            name="captcha"
+            noStyle
+            rules={[{ required: true, message: 'Vui lòng nhập mã thành viên' }]}
+          >
+            <Input />
+          </Form.Item>
         </Form.Item>
 
         <Form.Item
@@ -149,18 +146,20 @@ const Register: React.FC = () => {
           rules={[
             {
               validator: (_, value) =>
-                value ? Promise.resolve() : Promise.reject(new Error('Should accept agreement')),
+                value
+                  ? Promise.resolve()
+                  : Promise.reject(new Error('Bạn đã đọc quy định của công ty chưa?')),
             },
           ]}
           {...tailFormItemLayout}
         >
           <Checkbox>
-            I have read the <a href="">agreement</a>
+            Tôi đã đọc <a href="http://www.google.com">quy định</a> của công ty
           </Checkbox>
         </Form.Item>
         <Form.Item {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit">
-            Register
+          <Button type="primary" htmlType="submit" onClick={props.closeRegister}>
+            Đăng ký
           </Button>
         </Form.Item>
       </Form>

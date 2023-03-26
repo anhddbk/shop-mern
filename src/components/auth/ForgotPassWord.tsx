@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, Space } from 'antd';
 
 const onFinish = (values: any) => {
   console.log('Success:', values);
@@ -9,9 +9,13 @@ const onFinishFailed = (errorInfo: any) => {
   console.log('Failed:', errorInfo);
 };
 
-const ForgotPassWord: React.FC = () => {
+type ForgotProps = {
+  closeForgot?: () => void;
+};
+
+const ForgotPassWord = (props: ForgotProps) => {
   return (
-    <div className="container">
+    <div className="forgot-container">
       <Form
         name="basic"
         labelCol={{ span: 8 }}
@@ -25,22 +29,25 @@ const ForgotPassWord: React.FC = () => {
         <Form.Item
           label="Email"
           name="email"
-          rules={[{ required: true, message: 'Please input your email!' }]}
+          rules={[{ required: true, message: 'Vui lòng nhập E-mail!' }]}
         >
-          <Input />
+          <Space style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Input />
+            <Button>Gửi mã</Button>
+          </Space>
         </Form.Item>
 
         <Form.Item
-          label="Code"
+          label="Nhập mã"
           name="code"
-          rules={[{ required: true, message: 'Please input your code!' }]}
+          rules={[{ required: true, message: 'Vui lòng nhập mã!' }]}
         >
           <Input />
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button type="primary" htmlType="submit">
-            Submit
+          <Button type="primary" htmlType="submit" onClick={props.closeForgot}>
+            Gửi
           </Button>
         </Form.Item>
       </Form>
