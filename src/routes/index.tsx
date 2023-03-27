@@ -1,7 +1,7 @@
-import Dashboard from 'pages/Dashboard/Dashboard';
 // import RegisterPage from 'pages/Authen/RegisterPage';
 // import ForgotPassWordPage from 'pages/Authen/ForgotPassWordPage';
 import Auth from 'components/auth';
+import Dashboard from 'components/dashboard';
 
 //Public routes
 const publicRoutes = [

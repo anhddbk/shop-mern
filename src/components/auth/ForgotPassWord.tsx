@@ -1,19 +1,15 @@
-import React from 'react';
 import { Button, Form, Input, Space } from 'antd';
 
 const onFinish = (values: any) => {
   console.log('Success:', values);
+  window.location.reload();
 };
 
 const onFinishFailed = (errorInfo: any) => {
   console.log('Failed:', errorInfo);
 };
 
-type ForgotProps = {
-  closeForgot?: () => void;
-};
-
-const ForgotPassWord = (props: ForgotProps) => {
+const ForgotPassWord: React.FC = () => {
   return (
     <div className="forgot-container">
       <Form
@@ -46,7 +42,7 @@ const ForgotPassWord = (props: ForgotProps) => {
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button type="primary" htmlType="submit" onClick={props.closeForgot}>
+          <Button type="primary" htmlType="submit">
             Gửi
           </Button>
         </Form.Item>

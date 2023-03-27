@@ -1,5 +1,4 @@
 import { Image, Typography } from 'antd';
-import React from 'react';
 import '../../styled/Auth/Auth.styled.scss';
 import Login from './Login';
 

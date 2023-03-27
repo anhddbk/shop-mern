@@ -26,15 +26,11 @@ const tailFormItemLayout = {
   },
 };
 
-type RegisterProps = {
-  closeRegister?: () => void;
-};
-
-const Register = (props: RegisterProps) => {
+const Register: React.FC = () => {
   const [form] = Form.useForm();
-
   const onFinish = (values: any) => {
     console.log('Received values of form: ', values);
+    window.location.reload();
   };
 
   const prefixSelector = (
@@ -158,7 +154,7 @@ const Register = (props: RegisterProps) => {
           </Checkbox>
         </Form.Item>
         <Form.Item {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit" onClick={props.closeRegister}>
+          <Button type="primary" htmlType="submit">
             Đăng ký
           </Button>
         </Form.Item>

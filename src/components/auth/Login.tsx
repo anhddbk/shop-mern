@@ -6,6 +6,9 @@ import '../../styled/Auth/Login.styled.scss';
 import Register from './Register';
 import { ButtonRegisterStyled } from 'styled/Auth/RegisterButton.styled';
 import ForgotPassWord from './ForgotPassWord';
+import { useAppDispatch } from 'redux/hook';
+import { authActions } from 'features/auth/authSlice';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 
 const Login: React.FC = () => {
   const [openRegister, setOpenRegister] = useState(false);
@@ -14,13 +17,26 @@ const Login: React.FC = () => {
     console.log('Received values of form: ', values);
   };
 
+  const navigate: NavigateFunction = useNavigate();
+  const dispath = useAppDispatch();
+  const handleLoginClick = () => {
+    // TODO: Get username + password from login form
+    dispath(
+      authActions.login({
+        username: '',
+        password: '',
+      })
+    );
+    navigate('/dashboard');
+  };
+
   return (
     <div className="login-container">
       <Form
         name="normal_login"
         className="login-form"
         initialValues={{ remember: true }}
-        onFinish={onFinish}
+        onFinish={handleLoginClick}
       >
         <Form.Item
           name="username"
@@ -42,16 +58,24 @@ const Login: React.FC = () => {
           <Form.Item name="remember" valuePropName="checked" noStyle>
             <Checkbox>Ghi nhớ đăng nhập</Checkbox>
           </Form.Item>
-          <ButtonRegisterStyled onClick={() => {
+          <ButtonRegisterStyled
+            onClick={() => {
               setOpenForgot(true);
-            }}>
+            }}
+          >
             Quên mật khẩu?
           </ButtonRegisterStyled>
         </Form.Item>
         <Form.Item>
-          <Button type="primary" htmlType="submit" className="login-form-button">
+          <Button
+            type="primary"
+            htmlType="submit"
+            className="login-form-button"
+            onClick={handleLoginClick}
+          >
             Đăng nhập
           </Button>
+          <Button onClick={() => dispath(authActions.logout())}>Logout</Button>
           Or
           <ButtonRegisterStyled
             onClick={() => {
@@ -63,10 +87,10 @@ const Login: React.FC = () => {
         </Form.Item>
 
         <Modal open={openRegister} footer={null} closable={false} centered={true}>
-          <Register closeRegister={()=>{setOpenRegister(false)}}/>
+          <Register />
         </Modal>
         <Modal open={openForgot} footer={null} closable={false} centered={true}>
-          <ForgotPassWord closeForgot={()=>{setOpenForgot(false)}}/>
+          <ForgotPassWord />
         </Modal>
       </Form>
     </div>
