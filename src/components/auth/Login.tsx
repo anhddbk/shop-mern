@@ -7,27 +7,24 @@ import Register from './Register';
 import { ButtonRegisterStyled } from 'styled/Auth/RegisterButton.styled';
 import ForgotPassWord from './ForgotPassWord';
 import { useAppDispatch } from 'redux/hook';
-import { authActions } from 'features/auth/authSlice';
-import { NavigateFunction, useNavigate } from 'react-router-dom';
+import { authActions } from 'modules/auth/redux/authSlice';
 
 const Login: React.FC = () => {
   const [openRegister, setOpenRegister] = useState(false);
   const [openForgot, setOpenForgot] = useState(false);
-  const onFinish = (values: any) => {
-    console.log('Received values of form: ', values);
-  };
-
-  const navigate: NavigateFunction = useNavigate();
   const dispath = useAppDispatch();
-  const handleLoginClick = () => {
+  const handleLoginClick = (values: any) => {
     // TODO: Get username + password from login form
     dispath(
-      authActions.login({
-        username: '',
-        password: '',
-      })
+      authActions.login(
+        //payload login
+        {
+          username: 'abc',
+          password: 'abc',
+        }
+      )
     );
-    navigate('/dashboard');
+    console.log('Received values of form: ', values);
   };
 
   return (
@@ -67,15 +64,9 @@ const Login: React.FC = () => {
           </ButtonRegisterStyled>
         </Form.Item>
         <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="login-form-button"
-            onClick={handleLoginClick}
-          >
+          <Button type="primary" htmlType="submit" className="login-form-button">
             Đăng nhập
           </Button>
-          <Button onClick={() => dispath(authActions.logout())}>Logout</Button>
           Or
           <ButtonRegisterStyled
             onClick={() => {
