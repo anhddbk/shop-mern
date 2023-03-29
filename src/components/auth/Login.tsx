@@ -8,10 +8,12 @@ import { ButtonRegisterStyled } from 'styled/Auth/RegisterButton.styled';
 import ForgotPassWord from './ForgotPassWord';
 import { useAppDispatch } from 'redux/hook';
 import { authActions } from 'modules/auth/redux/authSlice';
+import { useNavigate } from 'react-router-dom';
 
 const Login: React.FC = () => {
   const [openRegister, setOpenRegister] = useState(false);
   const [openForgot, setOpenForgot] = useState(false);
+  const navigate = useNavigate()
   const dispath = useAppDispatch();
   const handleLoginClick = (values: any) => {
     // TODO: Get username + password from login form
@@ -19,12 +21,13 @@ const Login: React.FC = () => {
       authActions.login(
         //payload login
         {
-          username: 'abc',
-          password: 'abc',
+          username: values.username,
+          password: values.password,
         }
       )
     );
     console.log('Received values of form: ', values);
+    navigate('/dashboard')
   };
 
   return (

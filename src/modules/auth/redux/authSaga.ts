@@ -1,9 +1,21 @@
-import { NavigateFunction } from 'react-router-dom';
 import { PayloadAction } from '@reduxjs/toolkit';
+import { LoginPayLoad } from 'components/auth/types';
 import { call, fork, put, take } from 'redux-saga/effects';
-import { authActions, LoginPayLoad } from './authSlice';
+import { authActions } from './authSlice';
 
-function* handleLogin(payload: LoginPayLoad) {}
+function* handleLogin(payload: LoginPayLoad) {
+  try {
+    yield put(
+      authActions.loginSuccess({
+        id: '1',
+        name: 'abc',
+        username: 'abc',
+      })
+    );
+  } catch {
+    yield put(authActions.loginFailed);
+  }
+}
 
 function* handleLogout() {}
 

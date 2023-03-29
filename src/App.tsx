@@ -1,3 +1,4 @@
+import { ConfigProvider } from 'antd';
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { publicRoutes } from 'routes';
@@ -5,6 +6,7 @@ import { publicRoutes } from 'routes';
 function App() {
   return (
     <Router>
+      <ConfigProvider>
       <div className="App">
         <Routes>
           {publicRoutes.map((route, index) => {
@@ -12,6 +14,7 @@ function App() {
           })}
         </Routes>
       </div>
+      </ConfigProvider>
     </Router>
   );
 }
