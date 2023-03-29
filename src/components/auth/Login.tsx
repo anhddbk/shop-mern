@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 const Login: React.FC = () => {
   const [openRegister, setOpenRegister] = useState(false);
   const [openForgot, setOpenForgot] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const dispath = useAppDispatch();
   const handleLoginClick = (values: any) => {
     // TODO: Get username + password from login form
@@ -27,7 +27,7 @@ const Login: React.FC = () => {
       )
     );
     console.log('Received values of form: ', values);
-    navigate('/dashboard')
+    navigate('/admin');
   };
 
   return (

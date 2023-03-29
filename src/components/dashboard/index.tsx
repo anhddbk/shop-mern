@@ -4,7 +4,7 @@ import PageContent from './PageContent';
 import SideMenu from './SideMenu';
 import '../../styled/Dashboard/Index.styled.scss';
 
-function Dashboard() {
+function Admin() {
   return (
     <div className="main">
       <Header />
@@ -17,4 +17,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default Admin;

@@ -32,21 +32,21 @@ function SideMenu() {
           {
             label: 'Dashboard',
             icon: <AppstoreOutlined />,
-            key: '/',
+            key: 'dashboard',
           },
           {
             label: 'Inventory',
-            key: '/inventory',
+            key: 'inventory',
             icon: <ShopOutlined />,
           },
           {
             label: 'Orders',
-            key: '/orders',
+            key: 'orders',
             icon: <ShoppingCartOutlined />,
           },
           {
             label: 'Customers',
-            key: '/customers',
+            key: 'customers',
             icon: <UserOutlined />,
           },
         ]}

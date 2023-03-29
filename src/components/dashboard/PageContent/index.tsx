@@ -1,18 +1,13 @@
-import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Customers from './Customers';
-import Dashboard from './Dashboard';
-import Inventory from './Inventory';
-import Orders from './Orders';
+import { routes } from './Routes';
 
 function PageContent() {
   return (
     <div className="Content">
       <Routes>
-        <Route path="/" element={<Dashboard />}></Route>
-        <Route path="/inventory" element={<Inventory />}></Route>
-        <Route path="/orders" element={<Orders />}></Route>
-        <Route path="/customers" element={<Customers />}></Route>
+      {routes.map((route, index) => {
+              return <Route key={index} path={route.path} element={route.element}></Route>;
+            })}
       </Routes>
     </div>
   );
