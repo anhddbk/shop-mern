@@ -1,8 +1,13 @@
-import { DollarCircleOutlined, ShoppingCartOutlined, ShoppingOutlined, UserOutlined } from '@ant-design/icons';
-import { Card, Space, Statistic, Table, Typography } from 'antd'
-import React, {useState, useEffect } from 'react'
-
-import { getOrders, getCustomers, getRevenue, getInventory } from 'api/api';
+import {
+  DollarCircleOutlined,
+  ShoppingCartOutlined,
+  ShoppingOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
+import { Card, Space, Statistic, Table, Typography } from 'antd';
+import { ColumnsType } from 'antd/es/table';
+import React, { useState, useEffect } from 'react';
+import { Bar } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,26 +16,18 @@ import {
   Title,
   Tooltip,
   Legend,
-} from "chart.js";
+} from 'chart.js';
 
-import { Bar } from 'react-chartjs-2';
+import { getOrders, getCustomers, getRevenue, getInventory } from 'api/api';
+import { OrderProps } from '../types';
 
-
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 type DashboardCardProps = {
-  icon?: React.ReactNode,
-  title?: string,
-  value?: any,
-}
+  icon?: React.ReactNode;
+  title?: string;
+  value?: any;
+};
 
 function Dashboard() {
   const [orders, setOrders] = useState(0);
@@ -51,84 +48,82 @@ function Dashboard() {
     });
   }, []);
 
-
   return (
     <div>
-       <Space size={20} direction="vertical">
-      <Typography.Title level={4}>Dashboard</Typography.Title>
-      <Space direction="horizontal">
-      <DashboardCard
-          icon={
-            <ShoppingCartOutlined
-              style={{
-                color: "green",
-                backgroundColor: "rgba(0,255,0,0.25)",
-                borderRadius: 20,
-                fontSize: 24,
-                padding: 8,
-              }}
-            />
-          }
-          title={"Orders"}
-          value={orders}
-        />
-        <DashboardCard
-          icon={
-            <ShoppingOutlined
-              style={{
-                color: "blue",
-                backgroundColor: "rgba(0,0,255,0.25)",
-                borderRadius: 20,
-                fontSize: 24,
-                padding: 8,
-              }}
-            />
-          }
-          title={"Inventory"}
-          value={inventory}
-        />
-        <DashboardCard
-          icon={
-            <UserOutlined
-              style={{
-                color: "purple",
-                backgroundColor: "rgba(0,255,255,0.25)",
-                borderRadius: 20,
-                fontSize: 24,
-                padding: 8,
-              }}
-            />
-          }
-          title={"Customer"}
-          value={customers}
-        />
-        <DashboardCard
-          icon={
-            <DollarCircleOutlined
-              style={{
-                color: "red",
-                backgroundColor: "rgba(255,0,0,0.25)",
-                borderRadius: 20,
-                fontSize: 24,
-                padding: 8,
-              }}
-            />
-          }
-          title={"Revenue"}
-          value={revenue}
-        />
+      <Space size={20} direction="vertical">
+        <Typography.Title level={4}>Dashboard</Typography.Title>
+        <Space direction="horizontal">
+          <DashboardCard
+            icon={
+              <ShoppingCartOutlined
+                style={{
+                  color: 'green',
+                  backgroundColor: 'rgba(0,255,0,0.25)',
+                  borderRadius: 20,
+                  fontSize: 24,
+                  padding: 8,
+                }}
+              />
+            }
+            title={'Orders'}
+            value={orders}
+          />
+          <DashboardCard
+            icon={
+              <ShoppingOutlined
+                style={{
+                  color: 'blue',
+                  backgroundColor: 'rgba(0,0,255,0.25)',
+                  borderRadius: 20,
+                  fontSize: 24,
+                  padding: 8,
+                }}
+              />
+            }
+            title={'Inventory'}
+            value={inventory}
+          />
+          <DashboardCard
+            icon={
+              <UserOutlined
+                style={{
+                  color: 'purple',
+                  backgroundColor: 'rgba(0,255,255,0.25)',
+                  borderRadius: 20,
+                  fontSize: 24,
+                  padding: 8,
+                }}
+              />
+            }
+            title={'Customer'}
+            value={customers}
+          />
+          <DashboardCard
+            icon={
+              <DollarCircleOutlined
+                style={{
+                  color: 'red',
+                  backgroundColor: 'rgba(255,0,0,0.25)',
+                  borderRadius: 20,
+                  fontSize: 24,
+                  padding: 8,
+                }}
+              />
+            }
+            title={'Revenue'}
+            value={revenue}
+          />
+        </Space>
+        <Space>
+          <RecentOrders />
+          <DashboardChart />
+        </Space>
       </Space>
-      <Space>
-        <RecentOrders />
-        <DashboardChart />
-      </Space>
-    </Space>
     </div>
-  )
+  );
 }
 
-
-const DashboardCard = (props:DashboardCardProps) => {
+const DashboardCard = (props: DashboardCardProps) => {
   return (
     <Card>
       <Space direction="horizontal">
@@ -137,7 +132,25 @@ const DashboardCard = (props:DashboardCardProps) => {
       </Space>
     </Card>
   );
-}
+};
+
+const columns: ColumnsType<OrderProps> = [
+  {
+    key: 'title',
+    title: 'Title',
+    dataIndex: 'title',
+  },
+  {
+    key: 'quantity',
+    title: 'Quantity',
+    dataIndex: 'quantity',
+  },
+  {
+    key: 'price',
+    title: 'Price',
+    dataIndex: 'discountedPrice',
+  },
+];
 
 function RecentOrders() {
   const [dataSource, setDataSource] = useState([]);
@@ -155,20 +168,8 @@ function RecentOrders() {
     <>
       <Typography.Text>Recent Orders</Typography.Text>
       <Table
-        columns={[
-          {
-            title: "Title",
-            dataIndex: "title",
-          },
-          {
-            title: "Quantity",
-            dataIndex: "quantity",
-          },
-          {
-            title: "Price",
-            dataIndex: "discountedPrice",
-          },
-        ]}
+        rowKey={(record) => record.id}
+        columns={columns}
         loading={loading}
         dataSource={dataSource}
         pagination={false}
@@ -176,7 +177,6 @@ function RecentOrders() {
     </>
   );
 }
-
 
 function DashboardChart() {
   const [reveneuData, setReveneuData] = useState({
@@ -193,13 +193,13 @@ function DashboardChart() {
         return cart.discountedTotal;
       });
 
-      const dataSource:any = {
+      const dataSource: any = {
         labels,
         datasets: [
           {
-            label: "Revenue",
+            label: 'Revenue',
             data: data,
-            backgroundColor: "rgba(255, 0, 0, 1)",
+            backgroundColor: 'rgba(255, 0, 0, 1)',
           },
         ],
       };
@@ -211,11 +211,11 @@ function DashboardChart() {
     responsive: true,
     plugins: {
       legend: {
-        position: "bottom",
+        position: 'bottom',
       },
       title: {
         display: true,
-        text: "Order Revenue",
+        text: 'Order Revenue',
       },
     },
   };
@@ -227,4 +227,4 @@ function DashboardChart() {
   );
 }
 
-export default Dashboard
+export default Dashboard;

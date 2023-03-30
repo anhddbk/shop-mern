@@ -1,5 +1,5 @@
 import { Image, Typography } from 'antd';
-import '../../styled/Auth/Auth.styled.scss';
+import '../../styled/LoginPage/Auth.styled.scss';
 import Login from './Login';
 
 function Auth() {
@@ -12,7 +12,7 @@ function Auth() {
               src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
               width={50}
             />
-            <Typography.Title style={{paddingLeft: 12}}>Shop MERN</Typography.Title>
+            <Typography.Title style={{ paddingLeft: 12 }}>Shop MERN</Typography.Title>
           </div>
           <Typography.Text>My first project!</Typography.Text>
         </div>

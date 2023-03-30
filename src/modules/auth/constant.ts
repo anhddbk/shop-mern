@@ -1,7 +1,7 @@
-import { AuthState } from "components/auth/types";
+import { AuthState } from 'components/LoginPage/types';
 
 export const initialState: AuthState = {
-    isLoggedIn: false,
-    logging: false,
-    currentUser: undefined,
-}
+  isLoggedIn: false,
+  logging: false,
+  currentUser: undefined,
+};

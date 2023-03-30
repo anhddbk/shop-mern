@@ -16,7 +16,6 @@ function SideMenu() {
     const pathName = location.pathname;
     setSelectedKeys(pathName);
   }, [location.pathname]);
-
   const navigate = useNavigate();
   return (
     <div className="SideMenu">
@@ -24,30 +23,30 @@ function SideMenu() {
         className="SideMenuVertical"
         mode="vertical"
         onClick={(item) => {
-          //item.key
           navigate(item.key);
         }}
+        defaultSelectedKeys={['/admin/dashboard']}
         selectedKeys={[selectedKeys]}
         items={[
           {
             label: 'Dashboard',
             icon: <AppstoreOutlined />,
-            key: 'dashboard',
+            key: '/dashboard',
           },
           {
             label: 'Inventory',
-            key: 'inventory',
             icon: <ShopOutlined />,
+            key: '/inventory',
           },
           {
             label: 'Orders',
-            key: 'orders',
             icon: <ShoppingCartOutlined />,
+            key: '/orders',
           },
           {
             label: 'Customers',
-            key: 'customers',
             icon: <UserOutlined />,
+            key: '/customers',
           },
         ]}
       ></Menu>

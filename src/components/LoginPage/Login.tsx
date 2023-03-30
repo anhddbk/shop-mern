@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Button, Checkbox, Form, Input, Modal } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 
-import '../../styled/Auth/Login.styled.scss';
+import '../../styled/LoginPage/Login.styled.scss';
 import Register from './Register';
-import { ButtonRegisterStyled } from 'styled/Auth/RegisterButton.styled';
+import { ButtonRegisterStyled } from 'styled/LoginPage/RegisterButton.styled';
 import ForgotPassWord from './ForgotPassWord';
 import { useAppDispatch } from 'redux/hook';
 import { authActions } from 'modules/auth/redux/authSlice';
@@ -13,21 +13,17 @@ import { useNavigate } from 'react-router-dom';
 const Login: React.FC = () => {
   const [openRegister, setOpenRegister] = useState(false);
   const [openForgot, setOpenForgot] = useState(false);
-  const navigate = useNavigate();
   const dispath = useAppDispatch();
+  const navigate = useNavigate();
   const handleLoginClick = (values: any) => {
-    // TODO: Get username + password from login form
     dispath(
-      authActions.login(
-        //payload login
-        {
-          username: values.username,
-          password: values.password,
-        }
-      )
+      authActions.login({
+        username: values.username,
+        password: values.password,
+      })
     );
+    navigate('/dashboard');
     console.log('Received values of form: ', values);
-    navigate('/admin');
   };
 
   return (

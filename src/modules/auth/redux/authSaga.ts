@@ -1,5 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { LoginPayLoad } from 'components/auth/types';
+import { LoginPayLoad } from 'components/LoginPage/types';
 import { call, fork, put, take } from 'redux-saga/effects';
 import { authActions } from './authSlice';
 

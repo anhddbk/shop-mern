@@ -1,6 +1,6 @@
 import { initialState } from './../constant';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { LoginPayLoad } from 'components/auth/types';
+import { LoginPayLoad } from 'components/LoginPage/types';
 import { User } from 'models/index';
 
 const authSlice = createSlice({
