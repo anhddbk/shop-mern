@@ -1,27 +1,40 @@
-import { BellFilled, MailOutlined, MenuFoldOutlined } from '@ant-design/icons';
-import { Badge, Col, Drawer, Image, List, Menu, MenuProps, Space, Typography } from 'antd';
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import { BellFilled, MailOutlined } from '@ant-design/icons';
+import {
+  Avatar,
+  Badge,
+  Col,
+  Drawer,
+  Dropdown,
+  Image,
+  List,
+  MenuProps,
+  Space,
+  Typography,
+} from 'antd';
+import { authActions } from 'modules/auth/redux/authSlice';
 import { useState } from 'react';
-
-const items: MenuProps['items'] = [
-  {
-    icon: <MenuFoldOutlined style={{ fontSize: 24 }}/>,
-    key:'submenu',
-    children: [
-      {
-        label:'Name',
-        key:'name'
-      },
-      {
-        label:'Logout',
-        key:'logout'
-      },
-    ]
-  }
-]
+import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from 'redux/hook';
 
 function Header() {
+  const dispath = useAppDispatch();
+  const navigate = useNavigate();
   const [commentsOpen, setCommentsOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
+
+  const onClick: MenuProps['onClick'] = ({ values }: any) => {
+    dispath(authActions.logout());
+    navigate('/login');
+    console.log('Received values of form: ', values);
+  };
+
+  const items: MenuProps['items'] = [
+    {
+      label: 'Logout',
+      key: '1',
+    },
+  ];
   return (
     <div className="Header">
       <Col span={8}>
@@ -53,10 +66,13 @@ function Header() {
               }}
             />
           </Badge>
-          <Menu 
-          items={items}
-          mode="horizontal"
-          />
+          <Dropdown menu={{ items, onClick }}>
+            <a onClick={(e) => e.preventDefault()}>
+              <Space>
+                <Avatar></Avatar>
+              </Space>
+            </a>
+          </Dropdown>
         </Space>
         <Drawer
           title="Comments"

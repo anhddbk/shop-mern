@@ -1,6 +1,6 @@
 import { ConfigProvider } from 'antd';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { publicRoutes } from 'Routes';
+import { publicRoutes } from 'routes';
 
 function App() {
   return (

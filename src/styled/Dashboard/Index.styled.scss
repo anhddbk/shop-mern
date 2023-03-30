@@ -19,11 +19,6 @@
   justify-content: flex-end;
 }
 
-.SubMenu {
-  position: relative;
-  top: -20px;
-}
-
 .Footer {
   height: 50px;
   display: flex;
@@ -50,30 +45,4 @@
 
 .PageContent {
   padding-left: 12px;
-}
-
-.ant-menu-horizontal {
-  border-bottom: none;
-  line-height: 24px;
-  .ant-menu-submenu {
-    padding-inline-end: 0;
-    padding-inline-start: 0px;
-    .ant-menu-submenu::after{
-      border-bottom: none;
-    }
-  }
-}
-
-.ant-menu-light.ant-menu-horizontal >.ant-menu-submenu-selected::after {
-  border-bottom: none;
-}
-
-.ant-menu-light.ant-menu-horizontal >
-.ant-menu-submenu,
-.ant-menu-submenu-open::after,
-.ant-menu-submenu:hover::after,
-.ant-menu-item-open::after{
-  border-bottom: 0px;
-  border-bottom-width: 0px;
-  border-bottom-color: #fff;
 }
