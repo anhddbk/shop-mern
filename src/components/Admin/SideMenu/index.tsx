@@ -1,7 +1,8 @@
 import {
-  AppstoreOutlined,
+  HomeOutlined,
   ShopOutlined,
   ShoppingCartOutlined,
+  ShoppingOutlined,
   UserOutlined,
 } from '@ant-design/icons';
 import { Menu } from 'antd';
@@ -29,14 +30,19 @@ function SideMenu() {
         selectedKeys={[selectedKeys]}
         items={[
           {
-            label: 'Dashboard',
-            icon: <AppstoreOutlined />,
-            key: '/dashboard',
+            label: 'Home',
+            icon: <HomeOutlined />,
+            key: '/',
           },
           {
-            label: 'Inventory',
+            label: 'Product',
+            icon: <ShoppingOutlined />,
+            key: '/products',
+          },
+          {
+            label: 'Stock',
             icon: <ShopOutlined />,
-            key: '/inventory',
+            key: '/stock',
           },
           {
             label: 'Orders',

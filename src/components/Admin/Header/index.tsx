@@ -13,7 +13,7 @@ import {
   Typography,
 } from 'antd';
 import { authActions } from 'modules/auth/redux/authSlice';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from 'redux/hook';
 
@@ -23,12 +23,17 @@ function Header() {
   const [commentsOpen, setCommentsOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
 
+  const menuStyle = {
+    boxShadow: 'none',
+    padding: 0,
+    backgroundColor: '#b8bdd6',
+    borderRadius: 0,
+  };
   const onClick: MenuProps['onClick'] = ({ values }: any) => {
     dispath(authActions.logout());
     navigate('/login');
     console.log('Received values of form: ', values);
   };
-
   const items: MenuProps['items'] = [
     {
       label: 'Logout',
@@ -66,7 +71,19 @@ function Header() {
               }}
             />
           </Badge>
-          <Dropdown menu={{ items, onClick }}>
+          <Dropdown
+            menu={{ items, onClick }}
+            dropdownRender={(menu) => (
+              <div
+                style={{
+                  position: 'relative',
+                  top: 18,
+                }}
+              >
+                {React.cloneElement(menu as React.ReactElement, { style: menuStyle })}
+              </div>
+            )}
+          >
             <a onClick={(e) => e.preventDefault()}>
               <Space>
                 <Avatar></Avatar>

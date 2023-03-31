@@ -6,5 +6,5 @@ export default {
     apiHttpsUri: 'https://lgsp-uat.edsolabs.com',
     desktopWidth: 1366,
     tabletWidth: 1024,
-    localApIUri: 'http://localhost:3000',
+    localApIUri: 'http://localhost:3000/',
   };

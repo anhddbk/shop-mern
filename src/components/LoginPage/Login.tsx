@@ -22,7 +22,7 @@ const Login: React.FC = () => {
         password: values.password,
       })
     );
-    navigate('/dashboard');
+    navigate('/');
     console.log('Received values of form: ', values);
   };
 

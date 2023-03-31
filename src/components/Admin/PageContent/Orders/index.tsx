@@ -1,7 +1,7 @@
 import { Space, Table, Typography } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import { getOrders } from 'api/api';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { OrderProps } from '../types';
 
 const columns: ColumnsType<OrderProps> = [

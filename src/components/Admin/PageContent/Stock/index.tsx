@@ -42,7 +42,7 @@ const columns:ColumnsType<InventoryProps>= [
     dataIndex: "category",
   },
 ]
-function Inventory() {
+function Stock() {
   const [loading, setLoading] = useState(false);
   const [dataSource, setDataSource] = useState([]);
   useEffect(() => {
@@ -71,4 +71,4 @@ function Inventory() {
   )
 }
 
-export default Inventory
+export default Stock

@@ -1,5 +1,5 @@
 import Auth from '../components/LoginPage';
-import Admin from 'components/dashboard';
+import Admin from '../components/Admin';
 
 //Public routes
 const publicRoutes = [

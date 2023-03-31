@@ -2,7 +2,7 @@ import Footer from './Footer';
 import Header from './Header';
 import PageContent from './PageContent';
 import SideMenu from './SideMenu';
-import '../../styled/Dashboard/Index.styled.scss';
+import '../../styled/AdminPage/Index.styled.scss';
 
 function Admin() {
   return (

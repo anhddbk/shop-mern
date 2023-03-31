@@ -29,7 +29,7 @@ type DashboardCardProps = {
   value?: any;
 };
 
-function Dashboard() {
+function Home() {
   const [orders, setOrders] = useState(0);
   const [inventory, setInventory] = useState(0);
   const [customers, setCustomers] = useState(0);
@@ -227,4 +227,4 @@ function DashboardChart() {
   );
 }
 
-export default Dashboard;
+export default Home;

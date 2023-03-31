@@ -3,7 +3,7 @@ import { routes } from './Routes';
 
 function PageContent() {
   return (
-    <div className="Content">
+    <div className="PageContent">
       <Routes>
       {routes.map((route, index) => {
               return <Route key={index} path={route.path} element={route.element}></Route>;
