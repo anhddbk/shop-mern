@@ -1,10 +1,10 @@
-import Auth from '../components/LoginPage';
-import Admin from '../components/Admin';
+import Auth from 'pages/login';
+import Layout from '../components/layout/layout';
 
 //Public routes
 const publicRoutes = [
   { path: '/login', element: <Auth /> },
-  { path: '*', element: <Admin /> },
+  { path: '*', element: <Layout /> },
 ];
 
 //Private routes
