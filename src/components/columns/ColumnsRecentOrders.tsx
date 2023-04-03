@@ -1,7 +1,7 @@
 import { ColumnsType } from 'antd/es/table';
 import { OrderProps } from 'models';
 
-export const columnsOrders: ColumnsType<OrderProps> = [
+export const columnsRecentOrders: ColumnsType<OrderProps> = [
   {
     key: 'title',
     title: 'Title',

@@ -1,12 +1,12 @@
-import Customers from 'pages/customers';
-import Home from 'pages/home';
-import Orders from 'pages/orders';
-import Stock from 'pages/stock';
+import CustomersPage from 'pages/customers';
+import HomePage from 'pages/home';
+import OrdersPage from 'pages/orders';
+import StockPage from 'pages/stock';
 
 export const routes = [
-  { path: '/', element: <Home /> },
-  { path: '/stock', element: <Stock /> },
-  { path: '/customers', element: <Customers /> },
-  { path: '/orders', element: <Orders /> },
+  { path: '/', element: <HomePage /> },
+  { path: '/stock', element: <StockPage /> },
+  { path: '/customers', element: <CustomersPage /> },
+  { path: '/orders', element: <OrdersPage /> },
   // { path: '/products', element: <Products /> },
 ];

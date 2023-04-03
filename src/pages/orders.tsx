@@ -1,9 +1,9 @@
 import { Space, Table, Typography } from 'antd';
 import { getOrders } from 'api/api';
-import { columnsOrders } from 'components/columns/ColumnsRecentOrders';
+import { columnsOrders } from 'components/columns';
 import { useState, useEffect } from 'react';
 
-function Orders() {
+const OrdersPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [dataSource, setDataSource] = useState([]);
   useEffect(() => {
@@ -31,4 +31,4 @@ function Orders() {
   );
 }
 
-export default Orders;
+export default OrdersPage;

@@ -1,9 +1,10 @@
 import { Space, Table, Typography } from 'antd';
-import { getCustomers } from 'api/api';
-import { columnsCustomers } from 'components/columns/ColumnsCustomer';
 import React, { useState, useEffect } from 'react';
 
-const Customers: React.FC = () => {
+import { getCustomers } from 'api/api';
+import { columnsCustomers } from 'components/columns';
+
+const CustomersPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [dataSource, setDataSource] = useState([]);
   useEffect(() => {
@@ -31,4 +32,4 @@ const Customers: React.FC = () => {
   );
 };
 
-export default Customers;
+export default CustomersPage;

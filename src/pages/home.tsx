@@ -10,9 +10,9 @@ import React, { useState, useEffect } from 'react';
 import { getOrders, getCustomers, getInventory } from 'api/api';
 import TotalRevenueChart from 'components/charts/TotalRevenue';
 import { DashboardCard } from 'constants/Card';
-import { columnsOrders } from 'components/columns/ColumnsRecentOrders';
+import { columnsRecentOrders } from 'components/columns';
 
-const Home: React.FC = () => {
+const HomePage: React.FC = () => {
   const [orders, setOrders] = useState(0);
   const [inventory, setInventory] = useState(0);
   const [customers, setCustomers] = useState(0);
@@ -123,7 +123,7 @@ function RecentOrders() {
       <Typography.Text>Recent Orders</Typography.Text>
       <Table
         rowKey={(record) => record.id}
-        columns={columnsOrders}
+        columns={columnsRecentOrders}
         loading={loading}
         dataSource={dataSource}
         pagination={false}
@@ -132,4 +132,4 @@ function RecentOrders() {
   );
 }
 
-export default Home;
+export default HomePage;
