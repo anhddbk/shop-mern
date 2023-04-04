@@ -8,12 +8,12 @@ function* handleLogin(payload: LoginPayLoad) {
     yield put(
       authActions.loginSuccess({
         id: '1',
-        name: 'abc',
+        name: 'Dương Đức Anh',
         username: 'abc',
       })
     );
   } catch {
-    yield put(authActions.loginFailed);
+    yield put(authActions.loginFailure);
   }
 }
 
@@ -21,7 +21,7 @@ function* handleLogout() {}
 
 function* watchLoginFlow() {
   //lấy action -> đợi khi nào dispatch action login thì đi tiếp
-  const action: PayloadAction<LoginPayLoad> = yield take(authActions.login.type);
+  const action: PayloadAction<LoginPayLoad> = yield take(authActions.loginStart.type);
   // thực hiện hành động
   yield fork(handleLogin, action.payload);
   //lấy action -> đợi khi nào dispatch action logout thì đi tiếp

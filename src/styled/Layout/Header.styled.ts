@@ -8,6 +8,15 @@ export const HeaderStyled = styled.div`
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 `;
 
+export const menuStyle = {
+  position: 'relative',
+  top: 6,
+  boxShadow: 'none',
+  padding: 0,
+  backgroundColor: '#b8bdd6',
+  borderRadius: 0,
+};
+
 export const HeaderRightStyled = styled.div`
   display: flex;
   justify-content: flex-end;

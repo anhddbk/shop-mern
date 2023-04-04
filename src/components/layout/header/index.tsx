@@ -1,21 +1,12 @@
 import { BellFilled, MailOutlined } from '@ant-design/icons';
-import {
-  Avatar,
-  Badge,
-  Col,
-  Drawer,
-  Dropdown,
-  Image,
-  List,
-  MenuProps,
-  Space,
-  Typography,
-} from 'antd';
-import { authActions } from 'modules/auth/redux/authSlice';
+import { Badge, Col, Drawer, Dropdown, Image, List, MenuProps, Space, Typography } from 'antd';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import { useAppDispatch } from 'redux/hook';
-import { HeaderRightStyled, HeaderStyled } from 'styled/Layout';
+import { authActions } from 'modules/auth/redux/authSlice';
+import { HeaderRightStyled, HeaderStyled, menuStyle } from 'styled/Layout';
+import { UserHeading } from './UserHeading';
 
 const Header: React.FC = () => {
   const dispath = useAppDispatch();
@@ -23,12 +14,6 @@ const Header: React.FC = () => {
   const [commentsOpen, setCommentsOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
 
-  const menuStyle = {
-    boxShadow: 'none',
-    padding: 0,
-    backgroundColor: '#b8bdd6',
-    borderRadius: 0,
-  };
   const onClick: MenuProps['onClick'] = ({ values }: any) => {
     dispath(authActions.logout());
     navigate('/login');
@@ -75,18 +60,11 @@ const Header: React.FC = () => {
             <Dropdown
               menu={{ items, onClick }}
               dropdownRender={(menu) => (
-                <div
-                  style={{
-                    position: 'relative',
-                    top: 6,
-                  }}
-                >
-                  {React.cloneElement(menu as React.ReactElement, { style: menuStyle })}
-                </div>
+                <>{React.cloneElement(menu as React.ReactElement, { style: menuStyle })}</>
               )}
             >
               <Space>
-                <Avatar></Avatar>
+                <UserHeading/>
               </Space>
             </Dropdown>
           </Space>

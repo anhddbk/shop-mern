@@ -6,7 +6,8 @@ export interface LoginPayLoad {
 }
 
 export interface AuthState {
-    isLoggedIn: boolean;
-    logging?: boolean;
-    currentUser?: User;
-}
+    isAuthenticated: boolean;
+    user: User | null;
+    loading: boolean;
+    error: string | null;
+  }

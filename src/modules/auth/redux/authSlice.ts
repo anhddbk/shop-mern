@@ -1,27 +1,34 @@
+import { RootState } from 'redux/store';
+import { LoginPayLoad } from 'models/auth';
+import { User } from './../../../models/user';
 import { initialState } from './../constant';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { User } from 'models/index';
-import { LoginPayLoad } from 'models/auth';
 
-const authSlice = createSlice({
+export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    login(state, action: PayloadAction<LoginPayLoad>) {
-      state.logging = true;
+    loginStart: (state, action: PayloadAction<LoginPayLoad>) => {
+      state.loading = true;
+      state.error = null;
     },
-    loginSuccess(state, action: PayloadAction<User>) {
-      state.isLoggedIn = true;
-      state.logging = false;
-      state.currentUser = action.payload;
+    loginSuccess: (state, action: PayloadAction<User>) => {
+      state.isAuthenticated = true;
+      state.user = action.payload;
+      state.loading = false;
+      state.error = null;
     },
-    loginFailed(state, action: PayloadAction<string>) {
-      state.logging = false;
+    loginFailure: (state, action: PayloadAction<string>) => {
+      state.isAuthenticated = false;
+      state.user = null;
+      state.loading = false;
+      state.error = action.payload;
     },
-
-    logout(state) {
-      state.isLoggedIn = false;
-      state.currentUser = undefined;
+    logout: (state) => {
+      state.isAuthenticated = false;
+      state.user = null;
+      state.loading = false;
+      state.error = null;
     },
   },
 });
@@ -29,8 +36,10 @@ const authSlice = createSlice({
 export const authActions = authSlice.actions;
 
 // Selectors => truy xuất state
-export const selectIsLoggedIn = (state: any) => state.auth.isLoggedIn;
-export const selectIsLogging = (state: any) => state.auth.logging;
+export const selectIsLoggedIn = (state: RootState) => state.auth.isAuthenticated;
+export const selectUser = (state: RootState) =>
+  state.auth.user ?? { id: '', name: '', username: '' };
+export const select = (state: RootState) => state.auth.error;
 
 // Reducer => xử lý action và trả về state mới
 const authReducer = authSlice.reducer;
