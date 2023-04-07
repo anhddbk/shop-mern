@@ -1,5 +1,5 @@
-import LoginPage from 'pages/login';
-import Layout from '../components/layout/layout';
+import LoginPage from 'pages/LoginPage';
+import Layout from '../pages/AdminPage';
 
 //Public routes
 const publicRoutes = [

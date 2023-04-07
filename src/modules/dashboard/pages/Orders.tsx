@@ -1,7 +1,40 @@
-import { Space, Table, Typography } from 'antd';
-import { getOrders } from 'api/api';
-import { columnsOrders } from 'components/columns';
 import { useState, useEffect } from 'react';
+import { Space, Table, Typography } from 'antd';
+import { ColumnsType } from 'antd/es/table';
+import { getOrders } from 'services/ordersApi';
+
+type OrderProps = {
+  key: number;
+  id: number;
+  title: string;
+  quantity: number;
+  price: number;
+};
+
+const columns: ColumnsType<OrderProps> = [
+  {
+    title: 'Title',
+    dataIndex: 'title',
+  },
+  {
+    title: 'Price',
+    dataIndex: 'price',
+    render: (value) => <span>${value}</span>,
+  },
+  {
+    title: 'DiscountedPrice',
+    dataIndex: 'discountedPrice',
+    render: (value) => <span>${value}</span>,
+  },
+  {
+    title: 'Quantity',
+    dataIndex: 'quantity',
+  },
+  {
+    title: 'Total',
+    dataIndex: 'total',
+  },
+];
 
 const OrdersPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -20,7 +53,7 @@ const OrdersPage: React.FC = () => {
         <Table
           rowKey={(record) => record.id}
           loading={loading}
-          columns={columnsOrders}
+          columns={columns}
           dataSource={dataSource}
           pagination={{
             pageSize: 5,
@@ -29,6 +62,6 @@ const OrdersPage: React.FC = () => {
       </Space>
     </div>
   );
-}
+};
 
 export default OrdersPage;

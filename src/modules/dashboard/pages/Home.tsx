@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import {
   DollarCircleOutlined,
   ShoppingCartOutlined,
@@ -5,12 +6,39 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 import { Space, Table, Typography } from 'antd';
-import React, { useState, useEffect } from 'react';
+import { ColumnsType } from 'antd/es/table';
 
-import { getOrders, getCustomers, getInventory } from 'api/api';
 import TotalRevenueChart from 'components/charts/TotalRevenue';
-import { DashboardCard } from 'constants/Card';
-import { columnsRecentOrders } from 'components/columns';
+import { Cards } from 'components/cards/Card';
+import { getOrders } from 'services/ordersApi';
+import { getInventory } from 'services/inventoryApi';
+import { getCustomers } from 'services/customersApi';
+
+type RecentOrderProps = {
+  key: number;
+  id: number;
+  title: string;
+  quantity: number;
+  price: number;
+};
+
+const columns: ColumnsType<RecentOrderProps> = [
+  {
+    key: 'title',
+    title: 'Title',
+    dataIndex: 'title',
+  },
+  {
+    key: 'quantity',
+    title: 'Quantity',
+    dataIndex: 'quantity',
+  },
+  {
+    key: 'price',
+    title: 'Price',
+    dataIndex: 'discountedPrice',
+  },
+];
 
 const HomePage: React.FC = () => {
   const [orders, setOrders] = useState(0);
@@ -36,7 +64,7 @@ const HomePage: React.FC = () => {
       <Space size={20} direction="vertical">
         <Typography.Title level={4}>Dashboard</Typography.Title>
         <Space direction="horizontal">
-          <DashboardCard
+          <Cards
             icon={
               <ShoppingCartOutlined
                 style={{
@@ -51,7 +79,7 @@ const HomePage: React.FC = () => {
             title={'Orders'}
             value={orders}
           />
-          <DashboardCard
+          <Cards
             icon={
               <ShoppingOutlined
                 style={{
@@ -66,7 +94,7 @@ const HomePage: React.FC = () => {
             title={'Inventory'}
             value={inventory}
           />
-          <DashboardCard
+          <Cards
             icon={
               <UserOutlined
                 style={{
@@ -81,7 +109,7 @@ const HomePage: React.FC = () => {
             title={'Customer'}
             value={customers}
           />
-          <DashboardCard
+          <Cards
             icon={
               <DollarCircleOutlined
                 style={{
@@ -123,7 +151,7 @@ function RecentOrders() {
       <Typography.Text>Recent Orders</Typography.Text>
       <Table
         rowKey={(record) => record.id}
-        columns={columnsRecentOrders}
+        columns={columns}
         loading={loading}
         dataSource={dataSource}
         pagination={false}

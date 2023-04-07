@@ -1,8 +1,8 @@
 import { Card } from 'antd';
-import { getRevenue } from 'api/api';
 import { useEffect, useState } from 'react';
 import { Chart, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import { getRevenue } from 'services/revenueApi';
 Chart.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 function TotalRevenueChart() {
@@ -12,7 +12,7 @@ function TotalRevenueChart() {
   });
 
   useEffect(() => {
-    getRevenue().then((res) => {
+    getRevenue  ().then((res) => {
       const labels = res.carts.map((cart: any) => {
         return `User-${cart.userId}`;
       });

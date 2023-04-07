@@ -1,5 +1,5 @@
 export * from './header';
-export * from './layout';
+export * from '../../pages/AdminPage';
 export * from './sider';
 export * from './title';
 export * from './footer';

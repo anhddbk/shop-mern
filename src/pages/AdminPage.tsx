@@ -1,9 +1,10 @@
-import Footer from '../footer';
-import Header from '../header';
-import Sider from '../sider';
 import { Route, Routes } from 'react-router-dom';
-import { routes } from 'routes/contentRoutes';
+
+import Footer from '../components/layout/footer';
+import Header from '../components/layout/header';
+import Sider from '../components/layout/sider';
 import { ContentStyled, LayoutStyled, SideMenuAndPageContentStyled } from 'styled/Layout';
+import { subRoutes } from 'modules/dashboard/routes/SubRoutes';
 
 const LayoutAdmin: React.FC = () => {
   return (
@@ -13,7 +14,7 @@ const LayoutAdmin: React.FC = () => {
         <Sider></Sider>
         <ContentStyled>
           <Routes>
-            {routes.map((route, index) => {
+            {subRoutes.map((route, index) => {
               return <Route key={index} path={route.path} element={route.element}></Route>;
             })}
           </Routes>

@@ -18,29 +18,4 @@ export interface ListParams {
   [key: string]: any;
 }
 
-export interface OrderProps {
-  key: number;
-  id: number;
-  title: string;
-  quantity: number;
-  price: number;
-}
 
-export interface InventoryProps {
-  key: number;
-  id: number;
-  title: string;
-  price: number;
-}
-
-export interface CustomersProps {
-  key: number;
-  id: number;
-  title: string;
-}
-
-export interface CardProps {
-  icon?: React.ReactNode;
-  title?: string;
-  value?: any;
-}
