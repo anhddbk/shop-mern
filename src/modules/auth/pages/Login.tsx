@@ -4,7 +4,8 @@ import { authActions } from 'modules/auth/redux/authSlice';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from 'redux/hook';
-import { LoginButtonStyled, LoginFormStyled, RegisterButtonStyled } from 'styled/LoginPage';
+import { ButtonStyled } from 'styled/LoginPage/Button.styled';
+import { FormStyled } from 'styled/LoginPage/Form.styled';
 import ForgotPassWord from './ForgotPwd';
 import Register from './Register';
 
@@ -25,7 +26,8 @@ const Login: React.FC = () => {
   };
   return (
     <div className="login-container">
-      <LoginFormStyled
+      <FormStyled
+        maxWidth={300}
         name="normal_login"
         initialValues={{ remember: true }}
         onFinish={handleLoginClick}
@@ -50,26 +52,26 @@ const Login: React.FC = () => {
           <Form.Item name="remember" valuePropName="checked" noStyle>
             <Checkbox>Ghi nhớ đăng nhập</Checkbox>
           </Form.Item>
-          <RegisterButtonStyled
+          <ButtonStyled
             onClick={() => {
               setOpenForgot(true);
             }}
           >
             Quên mật khẩu?
-          </RegisterButtonStyled>
+          </ButtonStyled>
         </Form.Item>
         <Form.Item>
-          <LoginButtonStyled type="primary" htmlType="submit">
+          <ButtonStyled type="primary" htmlType="submit">
             Đăng nhập
-          </LoginButtonStyled>
+          </ButtonStyled>
           Or
-          <RegisterButtonStyled
+          <ButtonStyled
             onClick={() => {
               setOpenRegister(true);
             }}
           >
             Đăng ký tài khoản
-          </RegisterButtonStyled>
+          </ButtonStyled>
         </Form.Item>
 
         <Modal open={openRegister} footer={null} closable={false} centered={true}>
@@ -78,7 +80,7 @@ const Login: React.FC = () => {
         <Modal open={openForgot} footer={null} closable={false} centered={true}>
           <ForgotPassWord />
         </Modal>
-      </LoginFormStyled>
+      </FormStyled>
     </div>
   );
 };
