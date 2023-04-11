@@ -1,6 +1,7 @@
-import { Image, Typography } from 'antd';
-import Login from 'modules/auth/pages/Login';
-import { FlexCenterStyled, WrapperStyled } from 'styled/LoginPage';
+import Header from 'components/layout/header';
+import { AuthRoutes } from 'modules/auth/routes/AuthRoutes';
+import { Route, Routes } from 'react-router-dom';
+import { FlexStyled, WrapperStyled } from 'styled/common';
 
 function LoginPage() {
   return (
@@ -9,16 +10,14 @@ function LoginPage() {
       minWidth={100}
       minHeight={100}
     >
-      <FlexCenterStyled flexDirection="column">
-        <FlexCenterStyled>
-          <Image
-            src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
-            width={50}
-          />{' '}
-          <Typography.Title>Shop MERN</Typography.Title>
-        </FlexCenterStyled>
-        <Login />
-      </FlexCenterStyled>
+      <Header />
+      <FlexStyled flexDirection="column" justifyContent="" alignItems="center">
+        <Routes>
+          {AuthRoutes.map((route, index) => {
+            return <Route key={index} path={route.path} element={route.element}></Route>;
+          })}
+        </Routes>
+      </FlexStyled>
     </WrapperStyled>
   );
 }

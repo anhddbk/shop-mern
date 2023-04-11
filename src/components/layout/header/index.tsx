@@ -5,8 +5,9 @@ import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch } from 'redux/hook';
 import { authActions } from 'modules/auth/redux/authSlice';
-import { HeaderRightStyled, HeaderStyled, menuStyle } from 'styled/Layout';
 import { UserHeading } from './UserHeading';
+import { HeaderAndFooterStyled, menuStyle } from 'styled/Layout/HeaderAndFooter.styled';
+import { FlexStyled } from 'styled/common';
 
 const Header: React.FC = () => {
   const dispath = useAppDispatch();
@@ -16,7 +17,7 @@ const Header: React.FC = () => {
 
   const onClick: MenuProps['onClick'] = ({ values }: any) => {
     dispath(authActions.logout());
-    navigate('/login');
+    navigate('/auth/login');
     console.log('Received values of form: ', values);
   };
   const items: MenuProps['items'] = [
@@ -26,7 +27,13 @@ const Header: React.FC = () => {
     },
   ];
   return (
-    <HeaderStyled>
+    <HeaderAndFooterStyled
+      height={50}
+      borderBottom="1px solid rgba(0, 0, 0, 0.15)"
+      alignItems="center"
+      padding="4px 20px 4px 12px"
+      justifyContent="space-between"
+    >
       <Col span={8}>
         <Image
           width={40}
@@ -39,7 +46,7 @@ const Header: React.FC = () => {
       </Col>
 
       <Col span={8}>
-        <HeaderRightStyled>
+        <FlexStyled justifyContent="flex-end">
           <Space>
             <Badge count={5} dot>
               <MailOutlined
@@ -64,7 +71,7 @@ const Header: React.FC = () => {
               )}
             >
               <Space>
-                <UserHeading/>
+                <UserHeading />
               </Space>
             </Dropdown>
           </Space>
@@ -88,9 +95,9 @@ const Header: React.FC = () => {
           >
             <List></List>
           </Drawer>
-        </HeaderRightStyled>
+        </FlexStyled>
       </Col>
-    </HeaderStyled>
+    </HeaderAndFooterStyled>
   );
 };
 

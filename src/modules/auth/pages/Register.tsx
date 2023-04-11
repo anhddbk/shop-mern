@@ -1,4 +1,4 @@
-import { Button, Checkbox, Form, Input, Select } from "antd";
+import { Button, Checkbox, Form, Input, Select, Typography } from 'antd';
 
 const { Option } = Select;
 
@@ -43,7 +43,8 @@ const Register: React.FC = () => {
   );
 
   return (
-    <div className="register-container">
+    <>
+      <Typography.Title>ĐĂNG KÝ</Typography.Title>
       <Form
         {...formItemLayout}
         form={form}
@@ -155,8 +156,8 @@ const Register: React.FC = () => {
           </Button>
         </Form.Item>
       </Form>
-    </div>
+    </>
   );
 };
 
-export default Register
+export default Register;

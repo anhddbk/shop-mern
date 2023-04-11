@@ -3,7 +3,7 @@ import Layout from '../pages/AdminPage';
 
 //Public routes
 const publicRoutes = [
-  { path: '/login', element: <LoginPage /> },
+  { path: '/auth/*', element: <LoginPage /> },
   { path: '*', element: <Layout /> },
 ];
 

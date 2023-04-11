@@ -3,7 +3,7 @@ import CustomersPage from '../pages/Customers';
 import OrdersPage from '../pages/Orders';
 import StockPage from '../pages/Stock';
 
-export const subRoutes = [
+export const DashboardRoutes = [
   { path: '/', element: <HomePage /> },
   { path: '/customers', element: <CustomersPage /> },
   { path: '/orders', element: <OrdersPage /> },

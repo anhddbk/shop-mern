@@ -1,17 +1,12 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Checkbox, Form, Input, Modal } from 'antd';
+import { Checkbox, Form, Input, Typography } from 'antd';
 import { authActions } from 'modules/auth/redux/authSlice';
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from 'redux/hook';
-import { ButtonStyled } from 'styled/LoginPage/Button.styled';
-import { FormStyled } from 'styled/LoginPage/Form.styled';
-import ForgotPassWord from './ForgotPwd';
-import Register from './Register';
+import { ButtonStyled } from 'styled/Button.styled';
+import { FormStyled } from 'styled/Form.styled';
 
 const Login: React.FC = () => {
-  const [openRegister, setOpenRegister] = useState(false);
-  const [openForgot, setOpenForgot] = useState(false);
   const dispath = useAppDispatch();
   const navigate = useNavigate();
   const handleLoginClick = (values: any) => {
@@ -25,7 +20,8 @@ const Login: React.FC = () => {
     console.log('Received values of form: ', values);
   };
   return (
-    <div className="login-container">
+    <>
+      <Typography.Title>ĐĂNG NHẬP</Typography.Title>
       <FormStyled
         maxWidth={300}
         name="normal_login"
@@ -53,35 +49,34 @@ const Login: React.FC = () => {
             <Checkbox>Ghi nhớ đăng nhập</Checkbox>
           </Form.Item>
           <ButtonStyled
+            border="none"
+            background="none"
+            color="#1677ff"
             onClick={() => {
-              setOpenForgot(true);
+              navigate('/auth/forgotpassword');
             }}
           >
             Quên mật khẩu?
           </ButtonStyled>
         </Form.Item>
         <Form.Item>
-          <ButtonStyled type="primary" htmlType="submit">
+          <ButtonStyled type="primary" htmlType="submit" width={100}>
             Đăng nhập
           </ButtonStyled>
           Or
           <ButtonStyled
+            border="none"
+            background="none"
+            color="#1677ff"
             onClick={() => {
-              setOpenRegister(true);
+              navigate('/auth/register');
             }}
           >
             Đăng ký tài khoản
           </ButtonStyled>
         </Form.Item>
-
-        <Modal open={openRegister} footer={null} closable={false} centered={true}>
-          <Register />
-        </Modal>
-        <Modal open={openForgot} footer={null} closable={false} centered={true}>
-          <ForgotPassWord />
-        </Modal>
       </FormStyled>
-    </div>
+    </>
   );
 };
 
