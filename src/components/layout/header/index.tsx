@@ -1,11 +1,21 @@
 import { BellFilled, MailOutlined } from '@ant-design/icons';
-import { Badge, Col, Drawer, Dropdown, Image, List, MenuProps, Space, Typography } from 'antd';
+import {
+  Avatar,
+  Badge,
+  Col,
+  Drawer,
+  Dropdown,
+  Image,
+  List,
+  MenuProps,
+  Space,
+  Typography,
+} from 'antd';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from 'redux/hook';
+import { useAppDispatch } from 'redux/hook';
 import { authActions, selectUser } from 'modules/auth/redux/authSlice';
-import { UserHeading } from './UserHeading';
 import { HeaderAndFooterStyled, menuStyle } from 'styled/HeaderAndFooter.styled';
 import { FlexStyled } from 'styled/common';
 import { useSelector } from 'react-redux';
@@ -18,20 +28,25 @@ const Header: React.FC = () => {
   const [notificationsOpen, setNotificationsOpen] = useState(false);
 
   const onClick: MenuProps['onClick'] = ({ values }: any) => {
-    dispath(authActions.logout());
-    navigate('/auth/login');
-    console.log('Received values of form: ', values);
+    if (name.name) {
+      dispath(authActions.logout());
+      navigate('/auth/login');
+      console.log('Received values of form: ', values);
+    }
   };
-  const items: MenuProps['items'] = [
-    {
-      label: 'Logout',
-      key: '1',
-    },
-    {
-      label: 'Login',
-      key: '2',
-    },
-  ];
+  const items: MenuProps['items'] = name.name
+    ? [
+        {
+          label: 'Logout',
+          key: '1',
+        },
+      ]
+    : [
+        {
+          label: 'Login',
+          key: '2',
+        },
+      ];
   return (
     <HeaderAndFooterStyled
       height={50}
@@ -77,7 +92,7 @@ const Header: React.FC = () => {
               )}
             >
               <Space>
-                <UserHeading />
+                <Avatar></Avatar> <Typography.Text>{name.name}</Typography.Text>
               </Space>
             </Dropdown>
           </Space>

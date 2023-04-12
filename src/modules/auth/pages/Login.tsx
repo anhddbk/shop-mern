@@ -1,12 +1,15 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Checkbox, Form, Input, Typography } from 'antd';
-import { authActions } from 'modules/auth/redux/authSlice';
+import { authActions, selectUser } from 'modules/auth/redux/authSlice';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from 'redux/hook';
 import { ButtonStyled } from 'styled/Button.styled';
 import { FlexStyled } from 'styled/common';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 const Login: React.FC = () => {
+  const name = useSelector(selectUser);
   const dispath = useAppDispatch();
   const navigate = useNavigate();
   const handleLoginClick = (values: any) => {
@@ -16,9 +19,13 @@ const Login: React.FC = () => {
         password: values.password,
       })
     );
-    navigate('/');
     console.log('Received values of form: ', values);
   };
+  useEffect(() => {
+    if (name.name) {
+      navigate('/');
+    }
+  });
   return (
     <FlexStyled flexDirection="column" justifyContent="center" alignItems="center">
       <Typography.Title>ĐĂNG NHẬP</Typography.Title>

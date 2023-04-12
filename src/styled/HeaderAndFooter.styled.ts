@@ -19,6 +19,7 @@ export const HeaderAndFooterStyled = styled(FlexStyled)<HeaderAndFooterProps>`
 `;
 
 export const menuStyle = {
+  minWidth: 150,
   position: 'relative',
   top: 6,
   boxShadow: 'none',
