@@ -1,9 +1,12 @@
 export interface User{
-    id:string;
     name:string;
-    username:string;
-    code?:string;
-    email?:string;
-    phone?:string;
-    active?: boolean;
+    email:string;
+    passwordHash: string;
+    phone:string;
+    isAdmin?: boolean | false
+    street?:string | '';
+    apartment?: string | ''
+    zip?: string | '';
+    city?: string | '';
+    country?: string | ''
   }

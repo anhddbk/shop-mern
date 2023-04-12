@@ -7,7 +7,7 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { SideMenuStyled } from 'styled/Layout';
+import { Menu } from 'antd';
 
 const Sider: React.FC = () => {
   const location = useLocation();
@@ -19,8 +19,7 @@ const Sider: React.FC = () => {
   }, [location.pathname]);
   const navigate = useNavigate();
   return (
-    <SideMenuStyled
-      style={{ height: '100%' }}
+    <Menu
       mode="vertical"
       onClick={(item) => {
         navigate(item.key);
@@ -54,7 +53,7 @@ const Sider: React.FC = () => {
           key: '/customers',
         },
       ]}
-    ></SideMenuStyled>
+    ></Menu>
   );
 };
 

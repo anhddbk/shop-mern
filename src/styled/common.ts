@@ -1,12 +1,18 @@
 import styled from 'styled-components';
 
 interface WrapperProps {
+  display?: string;
   background?: string;
   minWidth?: number;
   minHeight?: number;
 }
 
+interface ContentProps {
+  padding?: string;
+}
+
 interface FlexStyledProps {
+  flex?: number;
   flexDirection?: string;
   alignItems?: string;
   justifyContent?: string;
@@ -30,11 +36,16 @@ const WrapperStyled = styled.div<WrapperProps>`
   min-height: ${(props) => props.minHeight + 'vh'};
 `;
 
-const FlexStyled = styled.div<FlexStyledProps>`
-  flex-direction: ${(props) => props.flexDirection};
+const FlexStyled = styled(WrapperStyled)<FlexStyledProps>`
   display: flex;
+  flex: ${(props) => props.flex};
+  flex-direction: ${(props) => props.flexDirection};
   justify-content: ${(props) => props.justifyContent};
   align-items: ${(props) => props.alignItems};
 `;
 
-export { H3, H4, WrapperStyled, FlexStyled };
+const ContentStyled = styled.div<ContentProps>`
+  padding: ${(props) => props.padding};
+`;
+
+export { H3, H4, WrapperStyled, FlexStyled, ContentStyled };

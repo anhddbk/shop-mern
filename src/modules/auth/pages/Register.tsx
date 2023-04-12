@@ -1,4 +1,6 @@
 import { Button, Checkbox, Form, Input, Select, Typography } from 'antd';
+import { useNavigate } from 'react-router-dom';
+import { FlexStyled } from 'styled/common';
 
 const { Option } = Select;
 
@@ -27,10 +29,11 @@ const tailFormItemLayout = {
 };
 
 const Register: React.FC = () => {
+  const navigate = useNavigate();
   const [form] = Form.useForm();
   const onFinish = (values: any) => {
     console.log('Received values of form: ', values);
-    window.location.reload();
+    navigate('/auth/login');
   };
 
   const prefixSelector = (
@@ -43,7 +46,7 @@ const Register: React.FC = () => {
   );
 
   return (
-    <>
+    <FlexStyled flexDirection="column" justifyContent="center" alignItems="center">
       <Typography.Title>ĐĂNG KÝ</Typography.Title>
       <Form
         {...formItemLayout}
@@ -51,7 +54,7 @@ const Register: React.FC = () => {
         name="register"
         initialValues={{ prefix: '84' }}
         onFinish={onFinish}
-        style={{ maxWidth: 600 }}
+        style={{ minWidth: 400 }}
         scrollToFirstError
       >
         <Form.Item
@@ -81,7 +84,9 @@ const Register: React.FC = () => {
             },
           ]}
           hasFeedback
-        ></Form.Item>
+        >
+          <Input.Password />
+        </Form.Item>
 
         <Form.Item
           name="confirm"
@@ -98,13 +103,13 @@ const Register: React.FC = () => {
                 if (!value || getFieldValue('password') === value) {
                   return Promise.resolve();
                 }
-                return Promise.reject(
-                  new Error('The two passwords that you entered do not match!')
-                );
+                return Promise.reject(new Error('Mật khẩu không khớp!'));
               },
             }),
           ]}
-        ></Form.Item>
+        >
+          <Input.Password />
+        </Form.Item>
 
         <Form.Item
           name="nickname"
@@ -123,14 +128,13 @@ const Register: React.FC = () => {
           <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
         </Form.Item>
 
-        <Form.Item label="Mã thành viên" extra="Vui lòng hỏi quản lý để lấy mã thành viên!">
-          <Form.Item
-            name="captcha"
-            noStyle
-            rules={[{ required: true, message: 'Vui lòng nhập mã thành viên' }]}
-          >
-            <Input />
-          </Form.Item>
+        <Form.Item
+          name="captcha"
+          label="Mã thành viên"
+          extra="Vui lòng hỏi quản lý để lấy mã thành viên!"
+          rules={[{ required: true, message: 'Vui lòng nhập mã thành viên' }]}
+        >
+          <Input />
         </Form.Item>
 
         <Form.Item
@@ -156,7 +160,7 @@ const Register: React.FC = () => {
           </Button>
         </Form.Item>
       </Form>
-    </>
+    </FlexStyled>
   );
 };
 

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Space, Table, Typography } from 'antd';
 import { ColumnsType } from 'antd/es/table';
-import { getOrders } from 'services/ordersApi';
+import { getOrders, OrdersApi } from 'services/ordersApi';
 
 type OrderProps = {
   key: number;
@@ -41,8 +41,12 @@ const OrdersPage: React.FC = () => {
   const [dataSource, setDataSource] = useState([]);
   useEffect(() => {
     setLoading(true);
-    getOrders().then((res) => {
-      setDataSource(res.products);
+    // getOrders().then((res) => {
+    //   setDataSource(res.products);
+    // setLoading(false);
+    // });
+    OrdersApi.getAll().then((response) => {
+      setDataSource((response as any).products);
       setLoading(false);
     });
   }, []);

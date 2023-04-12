@@ -1,5 +1,4 @@
-import axios, { AxiosResponse } from 'axios';
-
+import axios from 'axios';
 
 export const ResponseCode = {
   Ok: 0,
@@ -21,7 +20,7 @@ export const ResponseCode = {
 };
 
 const axiosClient = axios.create({
-  baseURL: 'http://localhost:3000/api',
+  baseURL: 'https://dummyjson.com',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -29,7 +28,7 @@ const axiosClient = axios.create({
 
 // Add a request interceptor
 axiosClient.interceptors.request.use(
-  function(config) {
+  function (config) {
     let _token: any = localStorage.getItem('auth-n-token');
     if (_token) {
       _token = JSON.parse(_token);
@@ -38,14 +37,14 @@ axiosClient.interceptors.request.use(
     }
     return config;
   },
-  function(error) {
+  function (error) {
     return Promise.reject(error);
-  },
+  }
 );
 
 // Add a response interceptor
 axiosClient.interceptors.response.use(
-  function (response: AxiosResponse) {
+  function (response) {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
     return response.data;

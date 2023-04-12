@@ -1,7 +1,7 @@
 import Header from 'components/layout/header';
 import { AuthRoutes } from 'modules/auth/routes/AuthRoutes';
 import { Route, Routes } from 'react-router-dom';
-import { FlexStyled, WrapperStyled } from 'styled/common';
+import { WrapperStyled } from 'styled/common';
 
 function LoginPage() {
   return (
@@ -11,13 +11,11 @@ function LoginPage() {
       minHeight={100}
     >
       <Header />
-      <FlexStyled flexDirection="column" justifyContent="" alignItems="center">
-        <Routes>
-          {AuthRoutes.map((route, index) => {
-            return <Route key={index} path={route.path} element={route.element}></Route>;
-          })}
-        </Routes>
-      </FlexStyled>
+      <Routes>
+        {AuthRoutes.map((route, index) => {
+          return <Route key={index} path={route.path} element={route.element}></Route>;
+        })}
+      </Routes>
     </WrapperStyled>
   );
 }

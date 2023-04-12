@@ -3,13 +3,15 @@ import { Badge, Col, Drawer, Dropdown, Image, List, MenuProps, Space, Typography
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useAppDispatch } from 'redux/hook';
-import { authActions } from 'modules/auth/redux/authSlice';
+import { useAppDispatch, useAppSelector } from 'redux/hook';
+import { authActions, selectUser } from 'modules/auth/redux/authSlice';
 import { UserHeading } from './UserHeading';
-import { HeaderAndFooterStyled, menuStyle } from 'styled/Layout/HeaderAndFooter.styled';
+import { HeaderAndFooterStyled, menuStyle } from 'styled/HeaderAndFooter.styled';
 import { FlexStyled } from 'styled/common';
+import { useSelector } from 'react-redux';
 
 const Header: React.FC = () => {
+  const name = useSelector(selectUser);
   const dispath = useAppDispatch();
   const navigate = useNavigate();
   const [commentsOpen, setCommentsOpen] = useState(false);
@@ -24,6 +26,10 @@ const Header: React.FC = () => {
     {
       label: 'Logout',
       key: '1',
+    },
+    {
+      label: 'Login',
+      key: '2',
     },
   ];
   return (

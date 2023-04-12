@@ -7,9 +7,10 @@ function* handleLogin(payload: LoginPayLoad) {
   try {
     yield put(
       authActions.loginSuccess({
-        id: '1',
         name: 'Dương Đức Anh',
-        username: 'abc',
+        email: 'anhdd@gmail,com',
+        passwordHash: 'abc',
+        phone: '0868766943',
       })
     );
   } catch {

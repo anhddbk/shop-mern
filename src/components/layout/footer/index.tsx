@@ -1,5 +1,5 @@
 import { Typography } from 'antd';
-import { HeaderAndFooterStyled } from 'styled/Layout/HeaderAndFooter.styled';
+import { HeaderAndFooterStyled } from 'styled/HeaderAndFooter.styled';
 
 const Footer: React.FC = () => {
   return (

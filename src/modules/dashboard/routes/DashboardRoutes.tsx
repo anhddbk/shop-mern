@@ -8,5 +8,5 @@ export const DashboardRoutes = [
   { path: '/customers', element: <CustomersPage /> },
   { path: '/orders', element: <OrdersPage /> },
   { path: '/stock', element: <StockPage /> },
-  // { path: '/products', element: <Products /> },
 ];
+  

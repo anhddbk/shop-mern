@@ -4,7 +4,7 @@ import { authActions } from 'modules/auth/redux/authSlice';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from 'redux/hook';
 import { ButtonStyled } from 'styled/Button.styled';
-import { FormStyled } from 'styled/Form.styled';
+import { FlexStyled } from 'styled/common';
 
 const Login: React.FC = () => {
   const dispath = useAppDispatch();
@@ -20,14 +20,9 @@ const Login: React.FC = () => {
     console.log('Received values of form: ', values);
   };
   return (
-    <>
+    <FlexStyled flexDirection="column" justifyContent="center" alignItems="center">
       <Typography.Title>ĐĂNG NHẬP</Typography.Title>
-      <FormStyled
-        maxWidth={300}
-        name="normal_login"
-        initialValues={{ remember: true }}
-        onFinish={handleLoginClick}
-      >
+      <Form name="normal_login" initialValues={{ remember: true }} onFinish={handleLoginClick}>
         <Form.Item
           name="username"
           rules={[{ required: true, message: 'Vui lòng nhập tên đăng nhập!' }]}
@@ -75,8 +70,8 @@ const Login: React.FC = () => {
             Đăng ký tài khoản
           </ButtonStyled>
         </Form.Item>
-      </FormStyled>
-    </>
+      </Form>
+    </FlexStyled>
   );
 };
 
