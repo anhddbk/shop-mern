@@ -1,3 +1,8 @@
-export const getCustomers = () => {
-    return fetch("https://dummyjson.com/users").then((res) => res.json());
-  };
+import axiosClient from './axiosClient';
+
+export const CustomersApi = {
+  getAll() {
+    const url = '/users';
+    return axiosClient.get(url);
+  },
+};

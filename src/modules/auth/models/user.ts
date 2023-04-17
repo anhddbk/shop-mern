@@ -3,6 +3,7 @@ export interface User{
     email:string;
     passwordHash: string;
     phone:string;
+    avatar?: string;
     isAdmin?: boolean | false
     street?:string | '';
     apartment?: string | ''

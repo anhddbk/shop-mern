@@ -1,14 +1,13 @@
 import { Avatar, Space, Table, Typography } from 'antd';
 import React, { useState, useEffect } from 'react';
 import { ColumnsType } from 'antd/es/table';
-import { getCustomers } from 'services/customersApi';
-
+import { CustomersApi } from 'services/customersApi';
 
 type CustomersProps = {
   key: number;
   id: number;
   title: string;
-}
+};
 
 const columns: ColumnsType<CustomersProps> = [
   {
@@ -47,14 +46,13 @@ const columns: ColumnsType<CustomersProps> = [
   },
 ];
 
-
 const CustomersPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [dataSource, setDataSource] = useState([]);
   useEffect(() => {
     setLoading(true);
-    getCustomers().then((res) => {
-      setDataSource(res.users);
+    CustomersApi.getAll().then((response: any) => {
+      setDataSource(response.users);
       setLoading(false);
     });
   }, []);

@@ -11,30 +11,52 @@ import {
   Space,
   Typography,
 } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch } from 'redux/hook';
 import { authActions, selectUser } from 'modules/auth/redux/authSlice';
-import { HeaderAndFooterStyled, menuStyle } from 'styled/HeaderAndFooter.styled';
+import { HeaderAndFooterStyled } from 'styled/HeaderAndFooter.styled';
 import { FlexStyled } from 'styled/common';
 import { useSelector } from 'react-redux';
+import { CommentsApi, OrdersApi } from 'services';
+
+const menuStyle = {
+  minWidth: 150,
+  position: 'relative',
+  top: 6,
+  boxShadow: 'none',
+  padding: 0,
+  backgroundColor: '#b8bdd6',
+  borderRadius: 0,
+};
 
 const Header: React.FC = () => {
-  const name = useSelector(selectUser);
+  const user = useSelector(selectUser);
   const dispath = useAppDispatch();
   const navigate = useNavigate();
+  const [comments, setComments] = useState([]);
+  const [orders, setOrders] = useState([]);
   const [commentsOpen, setCommentsOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
 
+  useEffect(() => {
+    CommentsApi.getAll().then((response: any) => {
+      setComments(response.comments);
+    });
+    OrdersApi.getAll().then((response: any) => {
+      setOrders(response.products);
+    });
+  }, []);
+
   const onClick: MenuProps['onClick'] = ({ values }: any) => {
-    if (name.name) {
+    if (user.name) {
       dispath(authActions.logout());
       navigate('/auth/login');
       console.log('Received values of form: ', values);
     }
   };
-  const items: MenuProps['items'] = name.name
+  const items: MenuProps['items'] = user.name
     ? [
         {
           label: 'Logout',
@@ -92,7 +114,8 @@ const Header: React.FC = () => {
               )}
             >
               <Space>
-                <Avatar></Avatar> <Typography.Text>{name.name}</Typography.Text>
+                <Avatar src={user.avatar}></Avatar>
+                <Typography.Text>{user.name}</Typography.Text>
               </Space>
             </Dropdown>
           </Space>
@@ -104,7 +127,12 @@ const Header: React.FC = () => {
             }}
             maskClosable
           >
-            <List></List>
+            <List
+              dataSource={comments}
+              renderItem={(item: any) => {
+                return <List.Item>{item.body}</List.Item>;
+              }}
+            ></List>
           </Drawer>
           <Drawer
             title="Notifications"
@@ -114,7 +142,16 @@ const Header: React.FC = () => {
             }}
             maskClosable
           >
-            <List></List>
+            <List
+              dataSource={orders}
+              renderItem={(item: any) => {
+                return (
+                  <List.Item>
+                    <Typography.Text strong>{item.title}</Typography.Text> has been ordered!
+                  </List.Item>
+                );
+              }}
+            ></List>
           </Drawer>
         </FlexStyled>
       </Col>

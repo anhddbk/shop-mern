@@ -18,18 +18,6 @@ interface FlexStyledProps {
   justifyContent?: string;
 }
 
-const H3 = styled.h3`
-  font-size: 16px;
-  font-weight: 500;
-  margin: 0;
-`;
-
-const H4 = styled.h4`
-  font-size: 14px;
-  font-weight: 500;
-  margin: 0;
-`;
-
 const WrapperStyled = styled.div<WrapperProps>`
   background: ${(props) => props.background};
   min-width: ${(props) => props.minWidth + 'vw'};
@@ -48,4 +36,4 @@ const ContentStyled = styled.div<ContentProps>`
   padding: ${(props) => props.padding};
 `;
 
-export { H3, H4, WrapperStyled, FlexStyled, ContentStyled };
+export { WrapperStyled, FlexStyled, ContentStyled };

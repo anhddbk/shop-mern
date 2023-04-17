@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Space, Table, Typography } from 'antd';
+import { Modal, Space, Table, Typography } from 'antd';
 import { ColumnsType } from 'antd/es/table';
-import { getOrders, OrdersApi } from 'services/ordersApi';
+import { OrdersApi } from 'services/ordersApi';
 
 type OrderProps = {
   key: number;
@@ -37,16 +37,28 @@ const columns: ColumnsType<OrderProps> = [
 ];
 
 const OrdersPage: React.FC = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [dataSource, setDataSource] = useState([]);
+  const [selectedRow, setSelectedRow] = useState<OrderProps>();
+  const handleDoubleClick = (record: any) => {
+    setSelectedRow(record);
+    setIsModalOpen(true);
+    console.log(record);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
   useEffect(() => {
     setLoading(true);
-    // getOrders().then((res) => {
-    //   setDataSource(res.products);
-    // setLoading(false);
-    // });
-    OrdersApi.getAll().then((response) => {
-      setDataSource((response as any).products);
+    OrdersApi.getAll().then((response: any) => {
+      setDataSource(response.products);
       setLoading(false);
     });
   }, []);
@@ -59,10 +71,22 @@ const OrdersPage: React.FC = () => {
           loading={loading}
           columns={columns}
           dataSource={dataSource}
+          onRow={(record, rowIndex) => {
+            return {
+              onDoubleClick: () => handleDoubleClick(record),
+            };
+          }}
           pagination={{
             pageSize: 5,
           }}
         ></Table>
+        <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+          {selectedRow && (
+            <>
+              <p>{selectedRow.title}</p>
+            </>
+          )}
+        </Modal>
       </Space>
     </div>
   );

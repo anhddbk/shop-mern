@@ -10,9 +10,8 @@ import { ColumnsType } from 'antd/es/table';
 
 import TotalRevenueChart from 'components/charts/TotalRevenue';
 import { Cards } from 'components/cards/Card';
-import { getOrders } from 'services/ordersApi';
-import { getInventory } from 'services/inventoryApi';
-import { getCustomers } from 'services/customersApi';
+import { CustomersApi, InventoryApi, OrdersApi } from 'services';
+
 
 type RecentOrderProps = {
   key: number;
@@ -47,15 +46,15 @@ const HomePage: React.FC = () => {
   const [revenue, setRevenue] = useState(0);
 
   useEffect(() => {
-    getOrders().then((res) => {
-      setOrders(res.total);
-      setRevenue(res.discountedTotal);
+    OrdersApi.getAll().then((response: any) => {
+      setOrders(response.total);
+      setRevenue(response.discountedTotal);
     });
-    getInventory().then((res) => {
-      setInventory(res.total);
+    InventoryApi.getAll().then((response: any) => {
+      setInventory(response.total);
     });
-    getCustomers().then((res) => {
-      setCustomers(res.total);
+    CustomersApi.getAll().then((response: any) => {
+      setCustomers(response.total);
     });
   }, []);
 
@@ -140,8 +139,8 @@ function RecentOrders() {
 
   useEffect(() => {
     setLoading(true);
-    getOrders().then((res) => {
-      setDataSource(res.products.splice(0, 3));
+    OrdersApi.getAll().then((response: any) => {
+      setDataSource(response.products.splice(0, 3));
       setLoading(false);
     });
   }, []);

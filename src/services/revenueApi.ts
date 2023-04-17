@@ -1,3 +1,8 @@
-export const getRevenue = () => {
-    return fetch("https://dummyjson.com/carts").then((res) => res.json());
-  };
+import axiosClient from "./axiosClient";
+
+  export const RevenueApi = {
+    getAll() {
+      const url = '/carts'
+      return axiosClient.get(url)
+    }
+  }

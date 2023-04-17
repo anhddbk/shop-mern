@@ -18,12 +18,4 @@ export const HeaderAndFooterStyled = styled(FlexStyled)<HeaderAndFooterProps>`
   border-top: ${(props) => props.borderTop};
 `;
 
-export const menuStyle = {
-  minWidth: 150,
-  position: 'relative',
-  top: 6,
-  boxShadow: 'none',
-  padding: 0,
-  backgroundColor: '#b8bdd6',
-  borderRadius: 0,
-};
+

@@ -46,7 +46,7 @@ export const authActions = authSlice.actions;
 // Selectors => truy xuất state
 export const selectIsLoggedIn = (state: RootState) => state.rootReducer.auth.isAuthenticated;
 export const selectUser = (state: RootState) =>
-  state.rootReducer.auth.user ?? { id: '', name: '', username: '' };
+  state.rootReducer.auth.user ?? { avatar: '', name: '', email: '' };
 export const select = (state: RootState) => state.rootReducer.auth.error;
 
 // Reducer => xử lý action và trả về state mới

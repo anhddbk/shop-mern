@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Avatar, Rate, Space, Table, Typography } from 'antd';
 import { ColumnsType } from 'antd/es/table';
-import { getInventory } from 'services/inventoryApi';
-
+import { InventoryApi } from 'services/inventoryApi';
 
 type StockProps = {
   key: number;
@@ -50,13 +49,13 @@ const columns: ColumnsType<StockProps> = [
   },
 ];
 
-const StockPage: React.FC = () => {
+const InventoryPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [dataSource, setDataSource] = useState([]);
   useEffect(() => {
     setLoading(true);
-    getInventory().then((res) => {
-      setDataSource(res.products);
+    InventoryApi.getAll().then((response: any) => {
+      setDataSource(response.products);
       setLoading(false);
     });
   }, []);
@@ -79,4 +78,4 @@ const StockPage: React.FC = () => {
   );
 };
 
-export default StockPage;
+export default InventoryPage;

@@ -8,6 +8,10 @@ export interface Product {
   total?: number;
 }
 
+export interface Order {
+  products?: Product
+}
+
 export interface Orders {
   orderItems: Product;
   shippingAddress1: string;

@@ -1,3 +1,8 @@
-export const getComments = () => {
-    return fetch("https://dummyjson.com/comments").then((res) => res.json());
-  };
+import axiosClient from './axiosClient';
+
+export const CommentsApi = {
+  getAll() {
+    const url = '/comments';
+    return axiosClient.get(url);
+  },
+};

@@ -38,9 +38,9 @@ const Sider: React.FC = () => {
           key: '/products',
         },
         {
-          label: 'Stock',
+          label: 'Inventory',
           icon: <ShopOutlined />,
-          key: '/stock',
+          key: '/inventory',
         },
         {
           label: 'Orders',
